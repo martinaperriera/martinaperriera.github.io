@@ -453,22 +453,13 @@ box-shadow: 0 4px 8px var(--shadow);
   border-radius: 12px;
   padding: 1rem;
   margin: 1rem;
-  /*booo*/
-.projects-carousel {
-  position: relative;
-text-align: center;
+  text-align: center;
   box-shadow: 0 0 12px rgba(0, 212, 255, 0.2);
   transition: transform 0.2s ease-in-out;
-  width: 90%;
-  max-width: 600px;
-  margin: 4rem auto;
-  font-family: 'Press Start 2P', monospace;
 }
 
 .project-card:hover {
   transform: scale(1.03);
-.slide {
-  display: none;
 }
 
 .carousel {
@@ -480,69 +471,29 @@ text-align: center;
   border: 1px solid #00d4ff;
   border-radius: 8px;
   background: #000;
-.slide.active {
-  display: block;
-  animation: fadeIn 0.6s ease-in-out;
 }
 
 .carousel-track {
   display: flex;
   transition: transform 0.4s ease-in-out;
-.slide h2 {
-  font-size: 1.2rem;
-  margin-bottom: 1rem;
 }
 
 .carousel img {
-.slide img {
-width: 100%;
+  width: 100%;
   height: 260px;
   object-fit: cover; /* tutte le immagini avranno la stessa proporzione e saranno centrate */
   border-radius: 8px;
-  height: auto;
-  border: 3px solid #000;
-  box-shadow: 5px 5px 0 #222;
-  margin-bottom: 1rem;
-}
-
-.slide p {
-  font-size: 0.8rem;
-  color: #444;
-  margin-bottom: 1.5rem;
-}
-
-.pixel-btn {
-  display: inline-block;
-  background: #fff;
-  color: #000;
-  padding: 0.5rem 1.2rem;
-  border: 2px solid #000;
-  box-shadow: 3px 3px 0 #000;
-  text-decoration: none;
-  font-size: 0.8rem;
-  margin: 0 0.5rem;
-  transition: all 0.1s ease-in-out;
 }
 
 .carousel button {
-.pixel-btn:hover {
-  transform: translate(2px, 2px);
-  box-shadow: none;
-}
-
-/* NAVIGATION */
-.nav {
-position: absolute;
-top: 50%;
-transform: translateY(-50%);
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
   background: rgba(0, 212, 255, 0.2);
   border: 1px solid #00d4ff;
   color: #00d4ff;
   font-size: 1.5rem;
-  background: none;
-  border: none;
-  font-size: 2rem;
-cursor: pointer;
+  cursor: pointer;
   padding: 0.2rem 0.6rem;
   border-radius: 4px;
   transition: background 0.2s;
@@ -550,76 +501,14 @@ cursor: pointer;
 
 .carousel button:hover {
   background: rgba(0, 212, 255, 0.4);
-.prev {
-  left: -60px;
-}
-
-.next {
-  right: -60px;
-}
-
-.dots {
-  margin-top: 1rem;
-}
-
-.dot {
-  height: 10px;
-  width: 10px;
-  margin: 0 5px;
-  background-color: #bbb;
-  border-radius: 50%;
-  display: inline-block;
-}
-
-.dot.active {
-  background-color: #000;
-}
-
-/* LOADING SCREEN */
-#loading-screen {
-  display: none;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: #000;
-  color: #00ff88;
-  font-size: 0.9rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  z-index: 10;
-}
-
-.progress-bar {
-  width: 70%;
-  height: 20px;
-  border: 2px solid #00ff88;
-  margin-top: 20px;
-  background: rgba(0,0,0,0.4);
-}
-
-.progress {
-  width: 0;
-  height: 100%;
-  background: #00ff88;
-  animation: loadBar 2s linear forwards;
 }
 
 .carousel .prev {
   left: 5px;
-@keyframes loadBar {
-  from { width: 0; }
-  to { width: 100%; }
 }
 
 .carousel .next {
   right: 5px;
-@keyframes fadeIn {
-  from { opacity: 0; transform: scale(0.98); }
-  to { opacity: 1; transform: scale(1); }
 }
 
 
@@ -894,36 +783,10 @@ I love bridging human creativity and machine intelligence — turning ideas into
 
 <!-- Projects Section -->
 
-    <section class="projects-carousel">
-  <div id="loading-screen">
-    <p>Loading next project...</p>
-    <div class="progress-bar">
-      <div class="progress"></div>
-    </div>
-  </div>
-
-  <div class="slide active">
-    <h2>AI Journal Series</h2>
-    <img src="images/journal1.png" alt="AI Journal Series">
-    <p>Low-content journals designed using AI tools (Midjourney, DALL·E, Canva).</p>
-    <div class="buttons">
-      <a href="#" class="pixel-btn">CODE</a>
-      <a href="#" class="pixel-btn">DEMO</a>
-    </div>
-  </div>
 
 <div class="project-card">
   <h3>AI Journal Series</h3>
   <p>Low-content journals designed with AI tools (Midjourney, DALL·E, Canva).</p>
-  <div class="slide">
-    <h2>Prompt Design Experiments</h2>
-    <img src="images/promptdesign1.png" alt="Prompt Design">
-    <p>Creative prompt engineering projects exploring AI model responses and text-to-image tools.</p>
-    <div class="buttons">
-      <a href="#" class="pixel-btn">CODE</a>
-      <a href="#" class="pixel-btn">DEMO</a>
-    </div>
-  </div>
 
   <div class="carousel">
     <button class="prev">❮</button>
@@ -931,33 +794,14 @@ I love bridging human creativity and machine intelligence — turning ideas into
       <img src="journal1.png" alt="AI Journal Cover">
       <img src="journal2.png" alt="AI Journal Inside">
       <img src="journal3.png" alt="AI Journal Moodboard">
-  <div class="slide">
-    <h2>Interactive Digital Art</h2>
-    <img src="images/digitalart.png" alt="AI Digital Art">
-    <p>Generated visuals and animations blending AI models, p5.js, and digital storytelling.</p>
-    <div class="buttons">
-      <a href="#" class="pixel-btn">CODE</a>
-      <a href="#" class="pixel-btn">DEMO</a>
-</div>
+    </div>
     <button class="next">❯</button>
-</div>
-</div>
-
-  <button class="nav prev">❮</button>
-  <button class="nav next">❯</button>
-
-  <div class="dots">
-    <span class="dot active"></span>
-    <span class="dot"></span>
-    <span class="dot"></span>
   </div>
-</section>
+</div>
 
 
 
-
-
-<!-- c -->
+    <!-- c -->
 <section id="projects" class="section">
 <h2 class="section-title">PROJECTS</h2>
 <div class="projects-grid">
@@ -1175,78 +1019,25 @@ if (e.key === 'h' || e.key === 'H') homeBtn.click(); // Home
 
 /*caro1*/
   const carousels = document.querySelectorAll(".carousel");
-/*no*/
-<script>
-  const slides = document.querySelectorAll(".slide");
-  const dots = document.querySelectorAll(".dot");
-  const prev = document.querySelector(".prev");
-  const next = document.querySelector(".next");
-  const loadingScreen = document.getElementById("loading-screen");
-  let index = 0;
-  let loading = false;
 
   carousels.forEach(carousel => {
     const track = carousel.querySelector(".carousel-track");
     const images = Array.from(track.children);
     const nextButton = carousel.querySelector(".next");
     const prevButton = carousel.querySelector(".prev");
-  function showSlide(i) {
-    slides.forEach((slide, n) => {
-      slide.classList.toggle("active", n === i);
-      dots[n].classList.toggle("active", n === i);
-    });
-  }
 
     let currentIndex = 0;
-  function simulateLoading(callback) {
-    loading = true;
-    loadingScreen.style.display = "flex";
-    const progress = loadingScreen.querySelector(".progress");
-    progress.style.width = "0";
-    progress.style.animation = "none";
-    void progress.offsetWidth; // forza il reflow
-    progress.style.animation = "loadBar 2s linear forwards";
-    setTimeout(() => {
-      loadingScreen.style.display = "none";
-      loading = false;
-      callback();
-    }, 2100);
-  }
 
     nextButton.addEventListener("click", () => {
       currentIndex = (currentIndex + 1) % images.length;
       track.style.transform = `translateX(-${currentIndex * 100}%)`;
-  next.addEventListener("click", () => {
-    if (loading) return;
-    simulateLoading(() => {
-      index = (index + 1) % slides.length;
-      showSlide(index);
-});
-  });
+    });
 
     prevButton.addEventListener("click", () => {
       currentIndex = (currentIndex - 1 + images.length) % images.length;
       track.style.transform = `translateX(-${currentIndex * 100}%)`;
-  prev.addEventListener("click", () => {
-    if (loading) return;
-    simulateLoading(() => {
-      index = (index - 1 + slides.length) % slides.length;
-      showSlide(index);
-});
-});
-
-  dots.forEach((dot, i) => {
-    dot.addEventListener("click", () => {
-      if (loading || i === index) return;
-      simulateLoading(() => {
-        index = i;
-        showSlide(index);
-      });
     });
   });
-</script>
-
-  
 </script>
 </body>
 </html>
