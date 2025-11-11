@@ -679,7 +679,7 @@
   <div class="main-content" id="mainContent">
     <div class="header">
       <h1 class="name">Martina Perriera</h1>
-      <p class="tagline">AI Creative • Prompt Engineer • Digital Storyteller</p>
+      <p class="tagline">AI enthusiast blending language, art, and technology.</p>
       
       <nav class="nav">
         <button class="nav-btn active" data-section="about">ABOUT</button>
@@ -695,9 +695,7 @@
         <p class="bio">
           I am a language & data specialist combining a humanistic background with a growing technical toolkit. I work at the intersection of prompt design, content evaluation and creative AI experimentation. My work blends rigorous linguistic thinking with a passion for visual storytelling.
         </p>
-        <p class="bio">
-          Selected for the Schuman Traineeship Programme (European Parliament, Luxembourg, 2024). Experience in academic project coordination, festival volunteering (Cinema City Palermo) and international presentations (conference in Salamanca).
-        </p>
+
         
         <div class="skills-container">
           <h3 class="skills-title">SKILLS & TOOLS</h3>
