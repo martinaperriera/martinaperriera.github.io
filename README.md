@@ -48,7 +48,6 @@
   
   body {
     font-family: 'Space Mono', monospace;
-    background: var(--bg);
     color: var(--text);
     transition: background 0.3s, color 0.3s;
     min-height: 100vh;
