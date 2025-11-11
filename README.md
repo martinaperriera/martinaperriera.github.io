@@ -572,7 +572,7 @@
   <div class="start-screen" id="startScreen">
     <!-- Pixel Avatar -->
    <div class="pixel-avatar">
-  <img src="images/avatar-custom.png" alt="Martina Avatar" class="avatar-img">
+  <img src="images/avatar-custom.PNG" alt="Martina Avatar" class="avatar-img">
 </div>
     <!-- Speech Bubble -->
     <div class="speech-bubble">
