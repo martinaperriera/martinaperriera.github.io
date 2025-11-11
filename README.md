@@ -566,6 +566,7 @@
     <!-- Pixel Avatar -->
    <div class="pixel-avatar">
   <img src="avatar-custom.PNG" alt="Martina Avatar" class="avatar-img">
+     style="image-rendering: pixelated; width: 150px; height: auto;"
 </div>
     <!-- Speech Bubble -->
     <div class="speech-bubble">
