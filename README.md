@@ -56,13 +56,6 @@
     padding: 20px;
   }
 
-  .avatar-img {
-  width: 120px;
-  height: auto;
-  image-rendering: pixelated;
-  filter: drop-shadow(0 3px 6px rgba(0,0,0,0.3));
-}
-
   
   /* Theme toggle */
   .theme-toggle {
@@ -573,7 +566,6 @@
     <!-- Pixel Avatar -->
    <div class="pixel-avatar">
   <img src="avatar-custom.PNG" alt="Martina Avatar" class="avatar-img">
-      style="image-rendering: pixelated; width: 150px; height: auto;"
 </div>
     <!-- Speech Bubble -->
     <div class="speech-bubble">
