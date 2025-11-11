@@ -678,7 +678,7 @@
   <!-- Main Content -->
   <div class="main-content" id="mainContent">
     <div class="header">
-      <h1 class="name">[Your Name]</h1>
+      <h1 class="name">Martina Perriera</h1>
       <p class="tagline">AI Creative • Prompt Engineer • Digital Storyteller</p>
       
       <nav class="nav">
