@@ -118,6 +118,7 @@
     margin: 0 auto;
     image-rendering: pixelated;
     image-rendering: crisp-edges;
+    background: transparent;
   }
   
   .pixel {
@@ -568,7 +569,7 @@
   <!-- Start Screen -->
   <div class="start-screen" id="startScreen">
 
-<img class="avatar-img" src="avatar-pixx.png" alt="Avatar pixellato" width="128" height="128" />
+<img class="avatar-img" src="avatar-pix.png" alt="Avatar pixellato" width="128" height="128" />
 
     
     <!-- Speech Bubble -->
