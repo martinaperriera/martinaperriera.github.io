@@ -55,12 +55,11 @@
     padding: 20px;
   }
 
-  .avatar-img {
-     width: 120px;
-  height: auto;
+.avatar-img {
   image-rendering: pixelated;
-  filter: drop-shadow(0 3px 6px rgba(0,0,0,0.3));
-  }
+  background: transparent;
+  display: block;
+}
   
   /* Theme toggle */
   .theme-toggle {
@@ -569,7 +568,7 @@
   <!-- Start Screen -->
   <div class="start-screen" id="startScreen">
 
- <img src="avatar-pix.png" alt="Avatar pixellato" width="128" height="128" />
+<img class="avatar-img" src="avatar-pix.png" alt="Avatar pixellato" width="128" height="128" />
 
     
     <!-- Speech Bubble -->
