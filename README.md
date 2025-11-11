@@ -55,6 +55,14 @@
     min-height: 100vh;
     padding: 20px;
   }
+
+  .avatar-img {
+  width: 120px;
+  height: auto;
+  image-rendering: pixelated;
+  filter: drop-shadow(0 3px 6px rgba(0,0,0,0.3));
+}
+
   
   /* Theme toggle */
   .theme-toggle {
@@ -563,164 +571,9 @@
   <!-- Start Screen -->
   <div class="start-screen" id="startScreen">
     <!-- Pixel Avatar -->
-    <div class="pixel-avatar">
-      <div class="pixel" style="background: transparent;"></div>
-      <div class="pixel" style="background: transparent;"></div>
-      <div class="pixel" style="background: transparent;"></div>
-      <div class="pixel" style="background: var(--pixel-secondary);"></div>
-      <div class="pixel" style="background: var(--pixel-secondary);"></div>
-      <div class="pixel" style="background: var(--pixel-secondary);"></div>
-      <div class="pixel" style="background: var(--pixel-secondary);"></div>
-      <div class="pixel" style="background: var(--pixel-secondary);"></div>
-      <div class="pixel" style="background: var(--pixel-secondary);"></div>
-      <div class="pixel" style="background: transparent;"></div>
-      <div class="pixel" style="background: transparent;"></div>
-      <div class="pixel" style="background: transparent;"></div>
-      
-      <div class="pixel" style="background: transparent;"></div>
-      <div class="pixel" style="background: transparent;"></div>
-      <div class="pixel" style="background: var(--pixel-secondary);"></div>
-      <div class="pixel" style="background: var(--pixel-secondary);"></div>
-      <div class="pixel" style="background: var(--pixel-secondary);"></div>
-      <div class="pixel" style="background: var(--pixel-secondary);"></div>
-      <div class="pixel" style="background: var(--pixel-secondary);"></div>
-      <div class="pixel" style="background: var(--pixel-secondary);"></div>
-      <div class="pixel" style="background: var(--pixel-secondary);"></div>
-      <div class="pixel" style="background: var(--pixel-secondary);"></div>
-      <div class="pixel" style="background: transparent;"></div>
-      <div class="pixel" style="background: transparent;"></div>
-      
-      <div class="pixel" style="background: transparent;"></div>
-      <div class="pixel" style="background: var(--pixel-secondary);"></div>
-      <div class="pixel" style="background: var(--pixel-skin);"></div>
-      <div class="pixel" style="background: var(--pixel-skin);"></div>
-      <div class="pixel" style="background: var(--pixel-skin);"></div>
-      <div class="pixel" style="background: var(--pixel-skin);"></div>
-      <div class="pixel" style="background: var(--pixel-skin);"></div>
-      <div class="pixel" style="background: var(--pixel-skin);"></div>
-      <div class="pixel" style="background: var(--pixel-skin);"></div>
-      <div class="pixel" style="background: var(--pixel-skin);"></div>
-      <div class="pixel" style="background: var(--pixel-secondary);"></div>
-      <div class="pixel" style="background: transparent;"></div>
-      
-      <div class="pixel" style="background: transparent;"></div>
-      <div class="pixel" style="background: var(--pixel-secondary);"></div>
-      <div class="pixel" style="background: var(--pixel-skin);"></div>
-      <div class="pixel" style="background: var(--pixel-skin);"></div>
-      <div class="pixel" style="background: var(--pixel-skin);"></div>
-      <div class="pixel" style="background: var(--pixel-skin);"></div>
-      <div class="pixel" style="background: var(--pixel-skin);"></div>
-      <div class="pixel" style="background: var(--pixel-skin);"></div>
-      <div class="pixel" style="background: var(--pixel-skin);"></div>
-      <div class="pixel" style="background: var(--pixel-skin);"></div>
-      <div class="pixel" style="background: var(--pixel-secondary);"></div>
-      <div class="pixel" style="background: transparent;"></div>
-      
-      <div class="pixel" style="background: var(--pixel-secondary);"></div>
-      <div class="pixel" style="background: var(--pixel-skin);"></div>
-      <div class="pixel" style="background: #2d2d2d;"></div>
-      <div class="pixel" style="background: var(--pixel-skin);"></div>
-      <div class="pixel" style="background: var(--pixel-skin);"></div>
-      <div class="pixel" style="background: var(--pixel-skin);"></div>
-      <div class="pixel" style="background: var(--pixel-skin);"></div>
-      <div class="pixel" style="background: var(--pixel-skin);"></div>
-      <div class="pixel" style="background: var(--pixel-skin);"></div>
-      <div class="pixel" style="background: #2d2d2d;"></div>
-      <div class="pixel" style="background: var(--pixel-skin);"></div>
-      <div class="pixel" style="background: var(--pixel-secondary);"></div>
-      
-      <div class="pixel" style="background: var(--pixel-secondary);"></div>
-      <div class="pixel" style="background: var(--pixel-skin);"></div>
-      <div class="pixel" style="background: var(--pixel-skin);"></div>
-      <div class="pixel" style="background: var(--pixel-skin);"></div>
-      <div class="pixel" style="background: var(--pixel-skin);"></div>
-      <div class="pixel" style="background: var(--pixel-primary);"></div>
-      <div class="pixel" style="background: var(--pixel-skin);"></div>
-      <div class="pixel" style="background: var(--pixel-skin);"></div>
-      <div class="pixel" style="background: var(--pixel-skin);"></div>
-      <div class="pixel" style="background: var(--pixel-skin);"></div>
-      <div class="pixel" style="background: var(--pixel-skin);"></div>
-      <div class="pixel" style="background: var(--pixel-secondary);"></div>
-      
-      <div class="pixel" style="background: var(--pixel-secondary);"></div>
-      <div class="pixel" style="background: var(--pixel-skin);"></div>
-      <div class="pixel" style="background: var(--pixel-skin);"></div>
-      <div class="pixel" style="background: var(--pixel-skin);"></div>
-      <div class="pixel" style="background: var(--pixel-primary);"></div>
-      <div class="pixel" style="background: var(--pixel-primary);"></div>
-      <div class="pixel" style="background: var(--pixel-primary);"></div>
-      <div class="pixel" style="background: var(--pixel-skin);"></div>
-      <div class="pixel" style="background: var(--pixel-skin);"></div>
-      <div class="pixel" style="background: var(--pixel-skin);"></div>
-      <div class="pixel" style="background: var(--pixel-skin);"></div>
-      <div class="pixel" style="background: var(--pixel-secondary);"></div>
-      
-      <div class="pixel" style="background: transparent;"></div>
-      <div class="pixel" style="background: var(--pixel-secondary);"></div>
-      <div class="pixel" style="background: var(--pixel-skin);"></div>
-      <div class="pixel" style="background: var(--pixel-skin);"></div>
-      <div class="pixel" style="background: var(--pixel-skin);"></div>
-      <div class="pixel" style="background: var(--pixel-primary);"></div>
-      <div class="pixel" style="background: var(--pixel-skin);"></div>
-      <div class="pixel" style="background: var(--pixel-skin);"></div>
-      <div class="pixel" style="background: var(--pixel-skin);"></div>
-      <div class="pixel" style="background: var(--pixel-skin);"></div>
-      <div class="pixel" style="background: var(--pixel-secondary);"></div>
-      <div class="pixel" style="background: transparent;"></div>
-      
-      <div class="pixel" style="background: transparent;"></div>
-      <div class="pixel" style="background: var(--pixel-secondary);"></div>
-      <div class="pixel" style="background: var(--pixel-skin);"></div>
-      <div class="pixel" style="background: var(--pixel-skin);"></div>
-      <div class="pixel" style="background: var(--pixel-skin);"></div>
-      <div class="pixel" style="background: var(--pixel-skin);"></div>
-      <div class="pixel" style="background: var(--pixel-skin);"></div>
-      <div class="pixel" style="background: var(--pixel-skin);"></div>
-      <div class="pixel" style="background: var(--pixel-skin);"></div>
-      <div class="pixel" style="background: var(--pixel-skin);"></div>
-      <div class="pixel" style="background: var(--pixel-secondary);"></div>
-      <div class="pixel" style="background: transparent;"></div>
-      
-      <div class="pixel" style="background: transparent;"></div>
-      <div class="pixel" style="background: transparent;"></div>
-      <div class="pixel" style="background: var(--pixel-primary);"></div>
-      <div class="pixel" style="background: var(--pixel-primary);"></div>
-      <div class="pixel" style="background: var(--pixel-skin);"></div>
-      <div class="pixel" style="background: var(--pixel-skin);"></div>
-      <div class="pixel" style="background: var(--pixel-skin);"></div>
-      <div class="pixel" style="background: var(--pixel-skin);"></div>
-      <div class="pixel" style="background: var(--pixel-primary);"></div>
-      <div class="pixel" style="background: var(--pixel-primary);"></div>
-      <div class="pixel" style="background: transparent;"></div>
-      <div class="pixel" style="background: transparent;"></div>
-      
-      <div class="pixel" style="background: transparent;"></div>
-      <div class="pixel" style="background: transparent;"></div>
-      <div class="pixel" style="background: var(--pixel-primary);"></div>
-      <div class="pixel" style="background: var(--pixel-primary);"></div>
-      <div class="pixel" style="background: var(--pixel-primary);"></div>
-      <div class="pixel" style="background: transparent;"></div>
-      <div class="pixel" style="background: transparent;"></div>
-      <div class="pixel" style="background: var(--pixel-primary);"></div>
-      <div class="pixel" style="background: var(--pixel-primary);"></div>
-      <div class="pixel" style="background: var(--pixel-primary);"></div>
-      <div class="pixel" style="background: transparent;"></div>
-      <div class="pixel" style="background: transparent;"></div>
-      
-      <div class="pixel" style="background: transparent;"></div>
-      <div class="pixel" style="background: transparent;"></div>
-      <div class="pixel" style="background: var(--pixel-primary);"></div>
-      <div class="pixel" style="background: var(--pixel-primary);"></div>
-      <div class="pixel" style="background: transparent;"></div>
-      <div class="pixel" style="background: transparent;"></div>
-      <div class="pixel" style="background: transparent;"></div>
-      <div class="pixel" style="background: transparent;"></div>
-      <div class="pixel" style="background: var(--pixel-primary);"></div>
-      <div class="pixel" style="background: var(--pixel-primary);"></div>
-      <div class="pixel" style="background: transparent;"></div>
-      <div class="pixel" style="background: transparent;"></div>
-    </div>
-    
+   <div class="pixel-avatar">
+  <img src="images/avatar-custom.png" alt="Martina Avatar" class="avatar-img">
+</div>
     <!-- Speech Bubble -->
     <div class="speech-bubble">
       <div class="bubble-text">
