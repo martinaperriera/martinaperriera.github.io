@@ -5,285 +5,874 @@
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>AI Arcade Portfolio — [Your Name]</title>
 
-<!-- Fonts & icons -->
-<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 
 <!-- Howler.js for sounds -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js"></script>
-<!-- Typed.js for typing effect -->
-<script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
 
 <style>
-  :root{
-    --bg:#030305;
-    --screen:#071018;
-    --accent:#00ff99;
-    --accent-2:#00d1ff;
-    --muted:#99ffcc;
-    --card:#0b1020;
-    --glass: rgba(255,255,255,0.03);
-    --mono: 'Press Start 2P', monospace;
-    --ui: 'Inter', system-ui, sans-serif;
+  :root {
+    /* Light mode */
+    --bg: #f5f5f5;
+    --text: #2d2d2d;
+    --accent: #ff6b9d;
+    --accent-2: #c44569;
+    --muted: #666;
+    --card-bg: #fff;
+    --border: #e0e0e0;
+    --shadow: rgba(0,0,0,0.1);
+    --pixel-primary: #ff6b9d;
+    --pixel-secondary: #ffd93d;
+    --pixel-skin: #ffdbac;
+    --bubble-bg: #fff;
+    --bubble-border: #2d2d2d;
   }
-  /* Basic reset */
-  *{box-sizing:border-box}
-  html,body{height:100%;margin:0;background:linear-gradient(180deg,#000 0%, #06050a 70%);color:var(--accent);font-family:var(--ui);-webkit-font-smoothing:antialiased}
-  a{color:var(--accent-2);text-decoration:none}
-  /* Center frame */
-  .frame{
-    max-width:1100px;
-    margin:30px auto;
-    padding:28px;
-    border:2px solid rgba(0,255,153,0.06);
-    background: radial-gradient(1200px 600px at 10% 10%, rgba(0,209,255,0.02), transparent 10%), linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
-    box-shadow: 0 8px 30px rgba(0,0,0,0.6);
-    border-radius:12px;
+  
+  [data-theme="dark"] {
+    --bg: #1a1a2e;
+    --text: #eee;
+    --accent: #00d4ff;
+    --accent-2: #00a8cc;
+    --muted: #aaa;
+    --card-bg: #16213e;
+    --border: #2d3561;
+    --shadow: rgba(0,0,0,0.4);
+    --pixel-primary: #00d4ff;
+    --pixel-secondary: #ffd93d;
+    --pixel-skin: #ffdbac;
+    --bubble-bg: #16213e;
+    --bubble-border: #00d4ff;
   }
-
-  /* Top header */
-  header{display:flex;align-items:center;gap:20px;justify-content:space-between;margin-bottom:22px}
-  .logo{display:flex;gap:12px;align-items:center}
-  .logo .badge{width:60px;height:60px;background:linear-gradient(135deg,var(--accent),var(--accent-2));border-radius:8px;display:flex;align-items:center;justify-content:center;color:#001; font-family:var(--mono);font-weight:700}
-  .logo h1{font-family:var(--mono);font-size:14px;margin:0;color:var(--accent)}
-  .logo p{margin:0;font-size:12px;color:var(--muted)}
-
-  /* screen area */
-  .screen{
-    background: linear-gradient(180deg, rgba(0,0,0,0.35), rgba(6,7,10,0.55));
-    border-radius:10px;
-    padding:34px;
-    min-height:520px;
-    position:relative;
-    overflow:hidden;
+  
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  
+  body {
+    font-family: 'Space Mono', monospace;
+    background: var(--bg);
+    color: var(--text);
+    transition: background 0.3s, color 0.3s;
+    min-height: 100vh;
+    padding: 20px;
   }
-
-  /* Start overlay */
-  .start-overlay{
-    position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(180deg, rgba(0,0,0,0.6), rgba(0,0,0,0.45));backdrop-filter: blur(2px);z-index:20;
+  
+  /* Theme toggle */
+  .theme-toggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: var(--card-bg);
+    border: 3px solid var(--border);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    transition: all 0.3s;
+    z-index: 1000;
+    box-shadow: 0 4px 15px var(--shadow);
   }
-  .title{
-    font-family:var(--mono);
-    font-size:18px;
-    letter-spacing:1px;
-    color:var(--accent-2);
-    margin-bottom:18px;
-    text-shadow:0 0 8px rgba(0,255,153,0.08);
+  
+  .theme-toggle:hover {
+    transform: scale(1.1) rotate(15deg);
+    box-shadow: 0 6px 20px var(--shadow);
   }
-  .typed-box{color:var(--muted);font-family:var(--ui);max-width:720px;padding:0 12px;margin-bottom:20px;font-size:13px;line-height:1.5}
-  .start-btn{
-    font-family:var(--mono);
-    background:transparent;
-    color:var(--accent);
-    border:2px solid var(--accent);
-    padding:14px 22px;border-radius:8px;
-    cursor:pointer; transition:all .18s ease; box-shadow: 0 6px 18px rgba(0,255,153,0.04)
+  
+  /* Container */
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
   }
-  .start-btn:hover{transform:translateY(-3px);box-shadow: 0 14px 30px rgba(0,255,153,0.08);background:var(--accent);color:#011}
-
-  /* Loading bar retro */
-  .loading-wrap{margin-top:24px;width:420px;border:2px solid rgba(0,255,153,0.06);padding:6px;border-radius:8px;background:var(--glass);display:flex;flex-direction:column;gap:8px;align-items:center}
-  .bar{
-    width:100%;height:12px;background:#000;border:1px solid rgba(0,255,153,0.06);border-radius:4px;overflow:hidden;position:relative;
+  
+  /* Start screen */
+  .start-screen {
+    min-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
   }
-  .bar-inner{height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--accent-2));box-shadow:0 4px 10px rgba(0,209,255,0.06)}
-  .bar-perc{font-family:var(--mono);font-size:11px;color:var(--muted);}
-
-  /* main nav */
-  .nav{
-    display:flex;gap:12px;flex-wrap:wrap;
-    margin-bottom:18px; align-items:center;
+  
+  .start-screen.hidden {
+    display: none;
   }
-  .nav .chip{padding:8px 12px;border-radius:8px;background:rgba(255,255,255,0.02);border:1px solid rgba(0,255,153,0.04);font-size:13px;cursor:pointer;color:var(--accent);transition:all .12s}
-  .nav .chip.active{background:linear-gradient(90deg, rgba(0,255,153,0.06), rgba(0,209,255,0.03));box-shadow: 0 8px 24px rgba(0,255,153,0.02)}
-
-  /* sections */
-  .section{display:none;opacity:0;transform:translateY(14px);transition:all .45s cubic-bezier(.2,.9,.3,1);padding:12px}
-  .section.active{display:block;opacity:1;transform:translateY(0)}
-
-  /* project cards */
-  .projects-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin-top:12px;}
-  .card{background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.02));border-radius:10px;padding:14px;border:1px solid rgba(0,255,153,0.04);min-height:220px;display:flex;flex-direction:column;justify-content:space-between}
-  .card h3{font-family:var(--mono);font-size:12px;margin:0;color:var(--accent)}
-  .card p{font-size:13px;color:var(--muted);margin:8px 0 12px}
-  .card img{width:100%;height:120px;object-fit:cover;border-radius:6px;border:1px solid rgba(0,255,153,0.03)}
-  .tag{font-family:var(--mono);font-size:11px;color:#001;background:var(--accent);padding:6px;border-radius:6px;display:inline-block;margin-top:6px}
-
-  /* about */
-  .about-grid{display:grid;grid-template-columns:1fr 320px;gap:20px;align-items:start}
-  .bio{font-size:14px;color:var(--muted);line-height:1.6}
-  .skills{background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.02));padding:12px;border-radius:10px;border:1px solid rgba(0,255,153,0.03)}
-  .skill-row{display:flex;flex-wrap:wrap;gap:8px}
-
-  /* contact */
-  .contact-box{display:flex;flex-direction:column;gap:8px}
-  .contact-box input, .contact-box textarea{background:transparent;border:1px solid rgba(0,255,153,0.06);padding:10px;border-radius:8px;color:var(--muted);font-size:13px}
-  .cta{background:var(--accent);color:#001;padding:12px;border-radius:8px;border:none;cursor:pointer;font-family:var(--mono)}
-
-  /* footer */
-  .meta{display:flex;justify-content:space-between;align-items:center;margin-top:18px;font-size:12px;color:var(--muted)}
-  .sound-toggle{cursor:pointer;padding:8px;border-radius:8px;border:1px solid rgba(0,255,153,0.04);background:transparent;color:var(--accent)}
-
-  /* responsive */
-  @media (max-width:900px){
-    .projects-grid{grid-template-columns:1fr}
-    .about-grid{grid-template-columns:1fr}
-    .logo p{display:none}
-    .frame{margin:14px}
-    .screen{min-height:650px}
+  
+  /* Pixel avatar */
+  .pixel-avatar {
+    width: 120px;
+    height: 120px;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: repeat(12, 1fr);
+    gap: 0;
+    margin: 0 auto;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+  }
+  
+  .pixel {
+    width: 100%;
+    height: 100%;
+  }
+  
+  /* Speech bubble */
+  .speech-bubble {
+    position: relative;
+    background: var(--bubble-bg);
+    border: 3px solid var(--bubble-border);
+    border-radius: 20px;
+    padding: 25px 30px;
+    max-width: 500px;
+    box-shadow: 0 8px 25px var(--shadow);
+    animation: float 3s ease-in-out infinite;
+  }
+  
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+  }
+  
+  .speech-bubble::after {
+    content: '';
+    position: absolute;
+    bottom: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    border-top: 20px solid var(--bubble-border);
+  }
+  
+  .speech-bubble::before {
+    content: '';
+    position: absolute;
+    bottom: -14px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 12px solid transparent;
+    border-right: 12px solid transparent;
+    border-top: 17px solid var(--bubble-bg);
+    z-index: 1;
+  }
+  
+  .bubble-text {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 14px;
+    line-height: 1.8;
+    color: var(--text);
+  }
+  
+  /* Start button */
+  .start-btn {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 16px;
+    padding: 20px 40px;
+    background: var(--accent);
+    color: #fff;
+    border: 4px solid var(--accent-2);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.2s;
+    box-shadow: 0 6px 0 var(--accent-2), 0 10px 20px var(--shadow);
+    position: relative;
+    top: 0;
+  }
+  
+  .start-btn:hover {
+    top: 3px;
+    box-shadow: 0 3px 0 var(--accent-2), 0 6px 15px var(--shadow);
+  }
+  
+  .start-btn:active {
+    top: 6px;
+    box-shadow: 0 0 0 var(--accent-2), 0 3px 10px var(--shadow);
+  }
+  
+  /* Loading bar */
+  .loading-container {
+    width: 100%;
+    max-width: 500px;
+    display: none;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 30px;
+  }
+  
+  .loading-container.active {
+    display: flex;
+  }
+  
+  .loading-label {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 12px;
+    color: var(--accent);
+  }
+  
+  .progress-bar {
+    width: 100%;
+    height: 40px;
+    background: var(--card-bg);
+    border: 4px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: inset 0 4px 8px var(--shadow);
+    position: relative;
+  }
+  
+  .progress-fill {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, var(--accent), var(--accent-2));
+    transition: width 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .progress-fill::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg, 
+      transparent 0%, 
+      rgba(255,255,255,0.3) 50%, 
+      transparent 100%);
+    animation: shimmer 1s infinite;
+  }
+  
+  @keyframes shimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+  }
+  
+  .progress-text {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 14px;
+    color: var(--accent);
+  }
+  
+  /* Main content */
+  .main-content {
+    display: none;
+    padding: 40px 20px;
+  }
+  
+  .main-content.active {
+    display: block;
+    animation: fadeIn 0.6s;
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  /* Header */
+  .header {
+    margin-bottom: 60px;
+  }
+  
+  .name {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 28px;
+    color: var(--accent);
+    margin-bottom: 15px;
+  }
+  
+  .tagline {
+    font-size: 16px;
+    color: var(--muted);
+    margin-bottom: 30px;
+  }
+  
+  /* Navigation */
+  .nav {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-bottom: 50px;
+  }
+  
+  .nav-btn {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 12px;
+    padding: 12px 24px;
+    background: var(--card-bg);
+    color: var(--text);
+    border: 3px solid var(--border);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  
+  .nav-btn:hover, .nav-btn.active {
+    background: var(--accent);
+    color: #fff;
+    border-color: var(--accent-2);
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px var(--shadow);
+  }
+  
+  /* Sections */
+  .section {
+    display: none;
+    text-align: left;
+  }
+  
+  .section.active {
+    display: block;
+    animation: fadeIn 0.5s;
+  }
+  
+  .section-title {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 20px;
+    color: var(--accent);
+    margin-bottom: 30px;
+    text-align: center;
+  }
+  
+  /* Projects grid */
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+    margin-top: 30px;
+  }
+  
+  .project-card {
+    background: var(--card-bg);
+    border: 3px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    transition: all 0.3s;
+    box-shadow: 0 4px 10px var(--shadow);
+  }
+  
+  .project-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px var(--shadow);
+    border-color: var(--accent);
+  }
+  
+  .project-title {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 12px;
+    color: var(--accent);
+    margin-bottom: 15px;
+    line-height: 1.6;
+  }
+  
+  .project-desc {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.6;
+    margin-bottom: 15px;
+  }
+  
+  .project-tags {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: 15px;
+  }
+  
+  .tag {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 9px;
+    padding: 6px 12px;
+    background: var(--accent);
+    color: #fff;
+    border-radius: 6px;
+  }
+  
+  /* About section */
+  .about-content {
+    max-width: 700px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  
+  .bio {
+    font-size: 16px;
+    line-height: 1.8;
+    color: var(--text);
+    margin-bottom: 25px;
+  }
+  
+  .skills-container {
+    margin-top: 40px;
+  }
+  
+  .skills-title {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 14px;
+    color: var(--accent);
+    margin-bottom: 20px;
+  }
+  
+  .skills-grid {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  
+  .skill-tag {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 10px;
+    padding: 10px 18px;
+    background: var(--card-bg);
+    color: var(--accent);
+    border: 3px solid var(--border);
+    border-radius: 8px;
+  }
+  
+  /* Contact section */
+  .contact-content {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 30px;
+  }
+  
+  .form-input, .form-textarea {
+    font-family: 'Space Mono', monospace;
+    font-size: 14px;
+    padding: 15px;
+    background: var(--card-bg);
+    color: var(--text);
+    border: 3px solid var(--border);
+    border-radius: 8px;
+    transition: all 0.3s;
+  }
+  
+  .form-input:focus, .form-textarea:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(255, 107, 157, 0.1);
+  }
+  
+  .form-textarea {
+    min-height: 150px;
+    resize: vertical;
+  }
+  
+  .submit-btn {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 14px;
+    padding: 18px;
+    background: var(--accent);
+    color: #fff;
+    border: 4px solid var(--accent-2);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+    box-shadow: 0 4px 0 var(--accent-2);
+  }
+  
+  .submit-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 0 var(--accent-2);
+  }
+  
+  .submit-btn:active {
+    transform: translateY(2px);
+    box-shadow: 0 2px 0 var(--accent-2);
+  }
+  
+  /* Footer */
+  .footer {
+    margin-top: 80px;
+    padding: 30px;
+    text-align: center;
+    border-top: 3px solid var(--border);
+  }
+  
+  .footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+  }
+  
+  .footer-link {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 11px;
+    color: var(--accent);
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+  
+  .footer-link:hover {
+    color: var(--accent-2);
+    transform: translateY(-2px);
+  }
+  
+  /* Responsive */
+  @media (max-width: 768px) {
+    .bubble-text {
+      font-size: 11px;
+    }
+    
+    .name {
+      font-size: 20px;
+    }
+    
+    .projects-grid {
+      grid-template-columns: 1fr;
+    }
+    
+    .nav {
+      gap: 10px;
+    }
+    
+    .nav-btn {
+      font-size: 10px;
+      padding: 10px 18px;
+    }
   }
 </style>
 </head>
 <body>
 
-<div class="frame">
-  <header>
-    <div class="logo">
-      <div class="badge">AI</div>
-      <div>
-        <h1>[Your Name]</h1>
-        <p>AI · Creativity · Language</p>
+<!-- Theme toggle -->
+<div class="theme-toggle" id="themeToggle">
+  <span id="themeIcon">🌙</span>
+</div>
+
+<div class="container">
+  <!-- Start Screen -->
+  <div class="start-screen" id="startScreen">
+    <!-- Pixel Avatar -->
+    <div class="pixel-avatar">
+      <div class="pixel" style="background: transparent;"></div>
+      <div class="pixel" style="background: transparent;"></div>
+      <div class="pixel" style="background: transparent;"></div>
+      <div class="pixel" style="background: var(--pixel-secondary);"></div>
+      <div class="pixel" style="background: var(--pixel-secondary);"></div>
+      <div class="pixel" style="background: var(--pixel-secondary);"></div>
+      <div class="pixel" style="background: var(--pixel-secondary);"></div>
+      <div class="pixel" style="background: var(--pixel-secondary);"></div>
+      <div class="pixel" style="background: var(--pixel-secondary);"></div>
+      <div class="pixel" style="background: transparent;"></div>
+      <div class="pixel" style="background: transparent;"></div>
+      <div class="pixel" style="background: transparent;"></div>
+      
+      <div class="pixel" style="background: transparent;"></div>
+      <div class="pixel" style="background: transparent;"></div>
+      <div class="pixel" style="background: var(--pixel-secondary);"></div>
+      <div class="pixel" style="background: var(--pixel-secondary);"></div>
+      <div class="pixel" style="background: var(--pixel-secondary);"></div>
+      <div class="pixel" style="background: var(--pixel-secondary);"></div>
+      <div class="pixel" style="background: var(--pixel-secondary);"></div>
+      <div class="pixel" style="background: var(--pixel-secondary);"></div>
+      <div class="pixel" style="background: var(--pixel-secondary);"></div>
+      <div class="pixel" style="background: var(--pixel-secondary);"></div>
+      <div class="pixel" style="background: transparent;"></div>
+      <div class="pixel" style="background: transparent;"></div>
+      
+      <div class="pixel" style="background: transparent;"></div>
+      <div class="pixel" style="background: var(--pixel-secondary);"></div>
+      <div class="pixel" style="background: var(--pixel-skin);"></div>
+      <div class="pixel" style="background: var(--pixel-skin);"></div>
+      <div class="pixel" style="background: var(--pixel-skin);"></div>
+      <div class="pixel" style="background: var(--pixel-skin);"></div>
+      <div class="pixel" style="background: var(--pixel-skin);"></div>
+      <div class="pixel" style="background: var(--pixel-skin);"></div>
+      <div class="pixel" style="background: var(--pixel-skin);"></div>
+      <div class="pixel" style="background: var(--pixel-skin);"></div>
+      <div class="pixel" style="background: var(--pixel-secondary);"></div>
+      <div class="pixel" style="background: transparent;"></div>
+      
+      <div class="pixel" style="background: transparent;"></div>
+      <div class="pixel" style="background: var(--pixel-secondary);"></div>
+      <div class="pixel" style="background: var(--pixel-skin);"></div>
+      <div class="pixel" style="background: var(--pixel-skin);"></div>
+      <div class="pixel" style="background: var(--pixel-skin);"></div>
+      <div class="pixel" style="background: var(--pixel-skin);"></div>
+      <div class="pixel" style="background: var(--pixel-skin);"></div>
+      <div class="pixel" style="background: var(--pixel-skin);"></div>
+      <div class="pixel" style="background: var(--pixel-skin);"></div>
+      <div class="pixel" style="background: var(--pixel-skin);"></div>
+      <div class="pixel" style="background: var(--pixel-secondary);"></div>
+      <div class="pixel" style="background: transparent;"></div>
+      
+      <div class="pixel" style="background: var(--pixel-secondary);"></div>
+      <div class="pixel" style="background: var(--pixel-skin);"></div>
+      <div class="pixel" style="background: #2d2d2d;"></div>
+      <div class="pixel" style="background: var(--pixel-skin);"></div>
+      <div class="pixel" style="background: var(--pixel-skin);"></div>
+      <div class="pixel" style="background: var(--pixel-skin);"></div>
+      <div class="pixel" style="background: var(--pixel-skin);"></div>
+      <div class="pixel" style="background: var(--pixel-skin);"></div>
+      <div class="pixel" style="background: var(--pixel-skin);"></div>
+      <div class="pixel" style="background: #2d2d2d;"></div>
+      <div class="pixel" style="background: var(--pixel-skin);"></div>
+      <div class="pixel" style="background: var(--pixel-secondary);"></div>
+      
+      <div class="pixel" style="background: var(--pixel-secondary);"></div>
+      <div class="pixel" style="background: var(--pixel-skin);"></div>
+      <div class="pixel" style="background: var(--pixel-skin);"></div>
+      <div class="pixel" style="background: var(--pixel-skin);"></div>
+      <div class="pixel" style="background: var(--pixel-skin);"></div>
+      <div class="pixel" style="background: var(--pixel-primary);"></div>
+      <div class="pixel" style="background: var(--pixel-skin);"></div>
+      <div class="pixel" style="background: var(--pixel-skin);"></div>
+      <div class="pixel" style="background: var(--pixel-skin);"></div>
+      <div class="pixel" style="background: var(--pixel-skin);"></div>
+      <div class="pixel" style="background: var(--pixel-skin);"></div>
+      <div class="pixel" style="background: var(--pixel-secondary);"></div>
+      
+      <div class="pixel" style="background: var(--pixel-secondary);"></div>
+      <div class="pixel" style="background: var(--pixel-skin);"></div>
+      <div class="pixel" style="background: var(--pixel-skin);"></div>
+      <div class="pixel" style="background: var(--pixel-skin);"></div>
+      <div class="pixel" style="background: var(--pixel-primary);"></div>
+      <div class="pixel" style="background: var(--pixel-primary);"></div>
+      <div class="pixel" style="background: var(--pixel-primary);"></div>
+      <div class="pixel" style="background: var(--pixel-skin);"></div>
+      <div class="pixel" style="background: var(--pixel-skin);"></div>
+      <div class="pixel" style="background: var(--pixel-skin);"></div>
+      <div class="pixel" style="background: var(--pixel-skin);"></div>
+      <div class="pixel" style="background: var(--pixel-secondary);"></div>
+      
+      <div class="pixel" style="background: transparent;"></div>
+      <div class="pixel" style="background: var(--pixel-secondary);"></div>
+      <div class="pixel" style="background: var(--pixel-skin);"></div>
+      <div class="pixel" style="background: var(--pixel-skin);"></div>
+      <div class="pixel" style="background: var(--pixel-skin);"></div>
+      <div class="pixel" style="background: var(--pixel-primary);"></div>
+      <div class="pixel" style="background: var(--pixel-skin);"></div>
+      <div class="pixel" style="background: var(--pixel-skin);"></div>
+      <div class="pixel" style="background: var(--pixel-skin);"></div>
+      <div class="pixel" style="background: var(--pixel-skin);"></div>
+      <div class="pixel" style="background: var(--pixel-secondary);"></div>
+      <div class="pixel" style="background: transparent;"></div>
+      
+      <div class="pixel" style="background: transparent;"></div>
+      <div class="pixel" style="background: var(--pixel-secondary);"></div>
+      <div class="pixel" style="background: var(--pixel-skin);"></div>
+      <div class="pixel" style="background: var(--pixel-skin);"></div>
+      <div class="pixel" style="background: var(--pixel-skin);"></div>
+      <div class="pixel" style="background: var(--pixel-skin);"></div>
+      <div class="pixel" style="background: var(--pixel-skin);"></div>
+      <div class="pixel" style="background: var(--pixel-skin);"></div>
+      <div class="pixel" style="background: var(--pixel-skin);"></div>
+      <div class="pixel" style="background: var(--pixel-skin);"></div>
+      <div class="pixel" style="background: var(--pixel-secondary);"></div>
+      <div class="pixel" style="background: transparent;"></div>
+      
+      <div class="pixel" style="background: transparent;"></div>
+      <div class="pixel" style="background: transparent;"></div>
+      <div class="pixel" style="background: var(--pixel-primary);"></div>
+      <div class="pixel" style="background: var(--pixel-primary);"></div>
+      <div class="pixel" style="background: var(--pixel-skin);"></div>
+      <div class="pixel" style="background: var(--pixel-skin);"></div>
+      <div class="pixel" style="background: var(--pixel-skin);"></div>
+      <div class="pixel" style="background: var(--pixel-skin);"></div>
+      <div class="pixel" style="background: var(--pixel-primary);"></div>
+      <div class="pixel" style="background: var(--pixel-primary);"></div>
+      <div class="pixel" style="background: transparent;"></div>
+      <div class="pixel" style="background: transparent;"></div>
+      
+      <div class="pixel" style="background: transparent;"></div>
+      <div class="pixel" style="background: transparent;"></div>
+      <div class="pixel" style="background: var(--pixel-primary);"></div>
+      <div class="pixel" style="background: var(--pixel-primary);"></div>
+      <div class="pixel" style="background: var(--pixel-primary);"></div>
+      <div class="pixel" style="background: transparent;"></div>
+      <div class="pixel" style="background: transparent;"></div>
+      <div class="pixel" style="background: var(--pixel-primary);"></div>
+      <div class="pixel" style="background: var(--pixel-primary);"></div>
+      <div class="pixel" style="background: var(--pixel-primary);"></div>
+      <div class="pixel" style="background: transparent;"></div>
+      <div class="pixel" style="background: transparent;"></div>
+      
+      <div class="pixel" style="background: transparent;"></div>
+      <div class="pixel" style="background: transparent;"></div>
+      <div class="pixel" style="background: var(--pixel-primary);"></div>
+      <div class="pixel" style="background: var(--pixel-primary);"></div>
+      <div class="pixel" style="background: transparent;"></div>
+      <div class="pixel" style="background: transparent;"></div>
+      <div class="pixel" style="background: transparent;"></div>
+      <div class="pixel" style="background: transparent;"></div>
+      <div class="pixel" style="background: var(--pixel-primary);"></div>
+      <div class="pixel" style="background: var(--pixel-primary);"></div>
+      <div class="pixel" style="background: transparent;"></div>
+      <div class="pixel" style="background: transparent;"></div>
+    </div>
+    
+    <!-- Speech Bubble -->
+    <div class="speech-bubble">
+      <div class="bubble-text">
+        Ciao! Welcome to my AI-powered creative space. Ready to explore?
       </div>
     </div>
-    <div style="display:flex;align-items:center;gap:12px">
-      <div class="sound-toggle" id="soundToggle">Sound: ON</div>
-      <div style="font-size:12px;color:var(--muted)">@Palermo</div>
-    </div>
-  </header>
-
-  <div class="screen" id="screen">
-
-    <!-- START OVERLAY -->
-    <div class="start-overlay" id="startOverlay">
-      <div class="title">WELCOME TO MY AI ARCADE</div>
-      <div class="typed-box"><span id="typedIntro"></span></div>
-      <button class="start-btn" id="startBtn">START</button>
-
-      <div class="loading-wrap" style="display:none" id="loadingWrap">
-        <div style="font-family:var(--mono);font-size:11px;color:var(--muted)">BOOT SEQUENCE</div>
-        <div class="bar" aria-hidden="true"><div class="bar-inner" id="barInner"></div></div>
-        <div class="bar-perc" id="barPerc">0%</div>
+    
+    <!-- Start Button -->
+    <button class="start-btn" id="startBtn">START</button>
+    
+    <!-- Loading Bar -->
+    <div class="loading-container" id="loadingContainer">
+      <div class="loading-label">LOADING...</div>
+      <div class="progress-bar">
+        <div class="progress-fill" id="progressFill"></div>
       </div>
+      <div class="progress-text" id="progressText">0%</div>
     </div>
-
-    <!-- NAV -->
-    <nav class="nav" id="mainNav" style="display:none">
-      <div class="chip active" data-target="projects">Projects</div>
-      <div class="chip" data-target="about">About</div>
-      <div class="chip" data-target="contact">Contact</div>
-    </nav>
-
-    <!-- CONTENT SECTIONS -->
-    <div id="projects" class="section">
-      <h2 style="margin-top:6px">Projects</h2>
+  </div>
+  
+  <!-- Main Content -->
+  <div class="main-content" id="mainContent">
+    <div class="header">
+      <h1 class="name">[Your Name]</h1>
+      <p class="tagline">AI Creative • Prompt Engineer • Digital Storyteller</p>
+      
+      <nav class="nav">
+        <button class="nav-btn active" data-section="about">ABOUT</button>
+        <button class="nav-btn" data-section="projects">PROJECTS</button>
+        <button class="nav-btn" data-section="contact">CONTACT</button>
+      </nav>
+    </div>
+    
+    <!-- About Section -->
+    <section id="about" class="section active">
+      <h2 class="section-title">ABOUT ME</h2>
+      <div class="about-content">
+        <p class="bio">
+          I am a language & data specialist combining a humanistic background with a growing technical toolkit. I work at the intersection of prompt design, content evaluation and creative AI experimentation. My work blends rigorous linguistic thinking with a passion for visual storytelling.
+        </p>
+        <p class="bio">
+          Selected for the Schuman Traineeship Programme (European Parliament, Luxembourg, 2024). Experience in academic project coordination, festival volunteering (Cinema City Palermo) and international presentations (conference in Salamanca).
+        </p>
+        
+        <div class="skills-container">
+          <h3 class="skills-title">SKILLS & TOOLS</h3>
+          <div class="skills-grid">
+            <span class="skill-tag">PROMPT ENGINEERING</span>
+            <span class="skill-tag">LLM EVALUATION</span>
+            <span class="skill-tag">MIDJOURNEY</span>
+            <span class="skill-tag">DALL·E</span>
+            <span class="skill-tag">CANVA</span>
+            <span class="skill-tag">PYTHON</span>
+            <span class="skill-tag">COPYWRITING</span>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Projects Section -->
+    <section id="projects" class="section">
+      <h2 class="section-title">PROJECTS</h2>
       <div class="projects-grid">
-        <div class="card">
-          <div>
-            <h3>Mindful Journals — AI Book Series</h3>
-            <p>Prompt design and iterative refinement to generate cover art and low-content interior pages for a mindfulness journal series.</p>
-          </div>
-          <div>
-            <img src="assets/journal-cover1.jpg" alt="journal cover 1">
-          </div>
-          <div style="display:flex;justify-content:space-between;align-items:center;margin-top:10px">
-            <div class="tag">Midjourney • ChatGPT</div>
-            <div style="font-size:11px;color:var(--muted)">2024</div>
+        <div class="project-card">
+          <h3 class="project-title">Mindful Journals — AI Book Series</h3>
+          <p class="project-desc">Prompt design and iterative refinement to generate cover art and low-content interior pages for a mindfulness journal series.</p>
+          <div class="project-tags">
+            <span class="tag">MIDJOURNEY</span>
+            <span class="tag">CHATGPT</span>
           </div>
         </div>
-
-        <div class="card">
-          <div>
-            <h3>Prompt Engineering & Model Evaluation</h3>
-            <p>Freelance evaluation and refinement of prompts for LLMs, focusing on clarity, instruction adherence and factual accuracy.</p>
-          </div>
-          <div>
-            <img src="assets/diagram-flow.png" alt="diagram flow">
-          </div>
-          <div style="display:flex;justify-content:space-between;align-items:center;margin-top:10px">
-            <div class="tag">GPT • Annotation</div>
-            <div style="font-size:11px;color:var(--muted)">2023–24</div>
+        
+        <div class="project-card">
+          <h3 class="project-title">Prompt Engineering & Model Evaluation</h3>
+          <p class="project-desc">Freelance evaluation and refinement of prompts for LLMs, focusing on clarity, instruction adherence and factual accuracy.</p>
+          <div class="project-tags">
+            <span class="tag">GPT</span>
+            <span class="tag">ANNOTATION</span>
           </div>
         </div>
-
-        <div class="card">
-          <div>
-            <h3>AI x Cinema — Visual Tribute</h3>
-            <p>Generative visual experiments inspired by European cinema; poster-style images combining poetic motifs and cinematic references.</p>
-          </div>
-          <div>
-            <img src="assets/cinema-poster1.jpg" alt="cinema poster">
-          </div>
-          <div style="display:flex;justify-content:space-between;align-items:center;margin-top:10px">
-            <div class="tag">DALL·E • Photoshop</div>
-            <div style="font-size:11px;color:var(--muted)">2024</div>
+        
+        <div class="project-card">
+          <h3 class="project-title">AI x Cinema — Visual Tribute</h3>
+          <p class="project-desc">Generative visual experiments inspired by European cinema; poster-style images combining poetic motifs and cinematic references.</p>
+          <div class="project-tags">
+            <span class="tag">DALL·E</span>
+            <span class="tag">PHOTOSHOP</span>
           </div>
         </div>
-
-        <div class="card">
-          <div>
-            <h3>Social Visuals & Copy</h3>
-            <p>AI-assisted social concepts combining generated visuals and copywriting to promote sustainable creative practices.</p>
-          </div>
-          <div>
-            <img src="assets/social-mock.jpg" alt="social mock">
-          </div>
-          <div style="display:flex;justify-content:space-between;align-items:center;margin-top:10px">
-            <div class="tag">ChatGPT • Canva</div>
-            <div style="font-size:11px;color:var(--muted)">2024</div>
+        
+        <div class="project-card">
+          <h3 class="project-title">Social Visuals & Copy</h3>
+          <p class="project-desc">AI-assisted social concepts combining generated visuals and copywriting to promote sustainable creative practices.</p>
+          <div class="project-tags">
+            <span class="tag">CHATGPT</span>
+            <span class="tag">CANVA</span>
           </div>
         </div>
-
       </div>
-    </div>
-
-    <div id="about" class="section">
-      <h2>About me</h2>
-      <div class="about-grid" style="margin-top:12px">
-        <div>
-          <p class="bio">I am a language & data specialist combining a humanistic background with a growing technical toolkit. I work at the intersection of prompt design, content evaluation and creative AI experimentation. My work blends rigorous linguistic thinking with a passion for visual storytelling.</p>
-
-          <p class="bio" style="margin-top:12px">Selected for the Schuman Traineeship Programme (European Parliament, Luxembourg, 2024). Experience in academic project coordination, festival volunteering (Cinema City Palermo) and international presentations (conference in Salamanca).</p>
-        </div>
-
-        <aside class="skills">
-          <div style="font-family:var(--mono);font-size:12px;color:var(--accent);margin-bottom:8px">Skills</div>
-          <div class="skill-row">
-            <div class="tag" style="background:#001;color:var(--accent)">Prompt Engineering</div>
-            <div class="tag" style="background:#001;color:var(--accent)">LLM Evaluation</div>
-            <div class="tag" style="background:#001;color:var(--accent)">Midjourney</div>
-            <div class="tag" style="background:#001;color:var(--accent)">DALL·E</div>
-            <div class="tag" style="background:#001;color:var(--accent)">Canva</div>
-            <div class="tag" style="background:#001;color:var(--accent)">Basic Python</div>
-            <div class="tag" style="background:#001;color:var(--accent)">Copywriting</div>
+    </section>
+    
+    <!-- About Section -->
+    <section id="about" class="section">
+      <h2 class="section-title">ABOUT ME</h2>
+      <div class="about-content">
+        <p class="bio">
+          I am a language & data specialist combining a humanistic background with a growing technical toolkit. I work at the intersection of prompt design, content evaluation and creative AI experimentation. My work blends rigorous linguistic thinking with a passion for visual storytelling.
+        </p>
+        <p class="bio">
+          Selected for the Schuman Traineeship Programme (European Parliament, Luxembourg, 2024). Experience in academic project coordination, festival volunteering (Cinema City Palermo) and international presentations (conference in Salamanca).
+        </p>
+        
+        <div class="skills-container">
+          <h3 class="skills-title">SKILLS & TOOLS</h3>
+          <div class="skills-grid">
+            <span class="skill-tag">PROMPT ENGINEERING</span>
+            <span class="skill-tag">LLM EVALUATION</span>
+            <span class="skill-tag">MIDJOURNEY</span>
+            <span class="skill-tag">DALL·E</span>
+            <span class="skill-tag">CANVA</span>
+            <span class="skill-tag">PYTHON</span>
+            <span class="skill-tag">COPYWRITING</span>
           </div>
-        </aside>
+        </div>
       </div>
-    </div>
-
-    <div id="contact" class="section">
-      <h2>Contact</h2>
-      <div style="margin-top:12px" class="contact-box">
-        <div style="font-size:13px;color:var(--muted)">Interested in collaborating or want to see more work? Drop a message.</div>
-        <input type="text" id="name" placeholder="Your name" />
-        <input type="email" id="email" placeholder="Email" />
-        <textarea id="message" rows="4" placeholder="Message"></textarea>
-        <button class="cta" id="sendBtn">Send Message</button>
+    </section>
+    
+    <!-- Contact Section -->
+    <section id="contact" class="section">
+      <h2 class="section-title">GET IN TOUCH</h2>
+      <div class="contact-content">
+        <p class="bio">Interested in collaborating or want to see more work? Drop me a message!</p>
+        <form class="contact-form" id="contactForm">
+          <input type="text" class="form-input" placeholder="Your Name" id="nameInput" required>
+          <input type="email" class="form-input" placeholder="Your Email" id="emailInput" required>
+          <textarea class="form-textarea" placeholder="Your Message" id="messageInput" required></textarea>
+          <button type="submit" class="submit-btn">SEND MESSAGE</button>
+        </form>
       </div>
-    </div>
-
-    <!-- meta bar -->
-    <div class="meta" style="margin-top:18px">
-      <div style="display:flex;gap:10px;align-items:center">
-        <div style="font-family:var(--mono);font-size:11px">[Your Name] • AI Creative</div>
-        <div style="font-size:12px;color:var(--muted)">Based in Palermo</div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="footer">
+      <p style="color: var(--muted); font-size: 12px;">Based in Palermo, Italy 🇮🇹</p>
+      <div class="footer-links">
+        <a href="#" class="footer-link" id="cvLink">DOWNLOAD CV</a>
+        <a href="https://linkedin.com/in/yourprofile" class="footer-link" target="_blank">LINKEDIN</a>
+        <a href="mailto:your.email@example.com" class="footer-link">EMAIL</a>
       </div>
-      <div style="display:flex;gap:10px;align-items:center">
-        <a href="#" id="cvLink">Download CV</a>
-        <a href="https://linkedin.com/in/yourprofile" target="_blank">LinkedIn</a>
-      </div>
-    </div>
-
-  </div><!-- end screen -->
-</div><!-- end frame -->
+    </footer>
+  </div>
+</div>
 
 <script>
 /* ========= SOUNDS ========= */
@@ -294,112 +883,110 @@ const sounds = {
   success: new Howl({ src: ['https://freesound.org/data/previews/331/331912_3248244-lq.mp3'], volume: 0.18 }),
 };
 
-/* Toggle sound */
 let soundOn = true;
-const soundToggle = document.getElementById('soundToggle');
-soundToggle.addEventListener('click', ()=> {
-  soundOn = !soundOn;
-  soundToggle.textContent = soundOn ? 'Sound: ON' : 'Sound: OFF';
+
+/* ========= THEME TOGGLE ========= */
+const themeToggle = document.getElementById('themeToggle');
+const themeIcon = document.getElementById('themeIcon');
+let isDark = false;
+
+themeToggle.addEventListener('click', () => {
+  isDark = !isDark;
+  document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
+  themeIcon.textContent = isDark ? '☀️' : '🌙';
+  if (soundOn) sounds.click.play();
 });
 
-/* Typed intro */
-const typed = new Typed('#typedIntro', {
-  strings: [
-    'Booting creative engine…',
-    'Loading prompt modules and image pipelines…',
-    'System ready. Press START to enter the portfolio.'
-  ],
-  typeSpeed: 35,
-  backSpeed: 0,
-  startDelay: 300,
-  showCursor: false
-});
-
-/* Start button and loading */
+/* ========= START SEQUENCE ========= */
 const startBtn = document.getElementById('startBtn');
-const startOverlay = document.getElementById('startOverlay');
-const loadingWrap = document.getElementById('loadingWrap');
-const barInner = document.getElementById('barInner');
-const barPerc = document.getElementById('barPerc');
-const mainNav = document.getElementById('mainNav');
+const startScreen = document.getElementById('startScreen');
+const loadingContainer = document.getElementById('loadingContainer');
+const progressFill = document.getElementById('progressFill');
+const progressText = document.getElementById('progressText');
+const mainContent = document.getElementById('mainContent');
 
-startBtn.addEventListener('click', async () => {
-  if(soundOn) sounds.click.play();
-  // hide typed, show loading
-  loadingWrap.style.display = 'flex';
+startBtn.addEventListener('click', () => {
+  if (soundOn) sounds.click.play();
+  
   startBtn.style.display = 'none';
-
-  if(soundOn) sounds.boot.play();
-
-  // animated load values
+  loadingContainer.classList.add('active');
+  
+  if (soundOn) sounds.boot.play();
+  
   let progress = 0;
-  const simInterval = setInterval(()=>{
-    progress += Math.random()*12;
-    if(progress>100) progress = 100;
-    barInner.style.width = progress + '%';
-    barPerc.textContent = Math.floor(progress) + '%';
-    if(progress>=100){
-      clearInterval(simInterval);
-      setTimeout(()=> enterPortfolio(), 500);
-      if(soundOn) sounds.success.play();
+  const interval = setInterval(() => {
+    progress += Math.random() * 15;
+    if (progress > 100) progress = 100;
+    
+    progressFill.style.width = progress + '%';
+    progressText.textContent = Math.floor(progress) + '%';
+    
+    if (soundOn && Math.random() > 0.7) sounds.tick.play();
+    
+    if (progress >= 100) {
+      clearInterval(interval);
+      setTimeout(() => {
+        if (soundOn) sounds.success.play();
+        startScreen.classList.add('hidden');
+        mainContent.classList.add('active');
+      }, 500);
     }
-  }, 300);
+  }, 200);
 });
 
-/* Enter portfolio */
-function enterPortfolio(){
-  startOverlay.style.display = 'none';
-  mainNav.style.display = 'flex';
-  showSection('projects');
-  // small nav animation
-  document.querySelectorAll('.chip').forEach(c=>{
-    c.addEventListener('click', ()=> {
-      document.querySelectorAll('.chip').forEach(x=>x.classList.remove('active'));
-      c.classList.add('active');
-      let t = c.getAttribute('data-target');
-      showSection(t);
-      if(soundOn) sounds.click.play();
+/* ========= NAVIGATION ========= */
+const navBtns = document.querySelectorAll('.nav-btn');
+const sections = document.querySelectorAll('.section');
+
+navBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    if (soundOn) sounds.click.play();
+    
+    // Update active button
+    navBtns.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    
+    // Show corresponding section
+    const targetSection = btn.getAttribute('data-section');
+    sections.forEach(section => {
+      section.classList.remove('active');
+      if (section.id === targetSection) {
+        section.classList.add('active');
+      }
     });
+    
+    // Smooth scroll to top
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   });
-}
-
-/* show section with nice transition */
-function showSection(id){
-  document.querySelectorAll('.section').forEach(s=>{
-    s.classList.remove('active');
-    // small exit effect
-    s.style.opacity = 0;
-    s.style.transform = 'translateY(10px)';
-    setTimeout(()=> s.style.display = 'none', 200);
-  });
-  const target = document.getElementById(id);
-  target.style.display = 'block';
-  setTimeout(()=> {
-    target.classList.add('active');
-    window.scrollTo({top:0, behavior:'smooth'});
-  }, 40);
-}
-
-/* Contact form emulation */
-document.getElementById('sendBtn').addEventListener('click', ()=>{
-  const name = document.getElementById('name').value || 'Guest';
-  if(soundOn) sounds.tick.play();
-  alert(`Thanks ${name}! Your message was sent (demo). I'll reply soon.`);
 });
 
-/* CV link placeholder */
-document.getElementById('cvLink').addEventListener('click',(e)=>{
+/* ========= CONTACT FORM ========= */
+const contactForm = document.getElementById('contactForm');
+
+contactForm.addEventListener('submit', (e) => {
   e.preventDefault();
-  alert('CV download placeholder — replace with your CV file link.');
+  
+  const name = document.getElementById('nameInput').value;
+  if (soundOn) sounds.success.play();
+  
+  alert(`Thanks ${name}! Your message has been sent (demo). I'll get back to you soon! 🚀`);
+  contactForm.reset();
 });
 
-/* small keyboard interaction - press 1/2/3 to jump sections */
-document.addEventListener('keydown',(e)=>{
-  if(document.getElementById('startOverlay').style.display === 'none'){
-    if(e.key === '1') document.querySelector('.chip[data-target="projects"]').click();
-    if(e.key === '2') document.querySelector('.chip[data-target="about"]').click();
-    if(e.key === '3') document.querySelector('.chip[data-target="contact"]').click();
-  }
+/* ========= CV LINK ========= */
+document.getElementById('cvLink').addEventListener('click', (e) => {
+  e.preventDefault();
+  if (soundOn) sounds.click.play();
+  alert('CV download placeholder — replace with your actual CV file link.');
+});
+
+/* ========= KEYBOARD SHORTCUTS ========= */
+document.addEventListener('keydown', (e) => {
+  if (!startScreen.classList.contains('hidden')) return;
+  
+  if (e.key === '1') navBtns[0].click();
+  if (e.key === '2') navBtns[1].click();
+  if (e.key === '3') navBtns[2].click();
 });
 </script>
 </body>
